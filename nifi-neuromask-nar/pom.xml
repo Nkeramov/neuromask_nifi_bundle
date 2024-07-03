@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.nifi.neuromask</groupId>
 		<artifactId>nifi-neuromask-bundle</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.5</version>
 	</parent>
 
 	<artifactId>nifi-neuromask-nar</artifactId>

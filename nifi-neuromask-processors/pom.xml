@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.nifi.neuromask</groupId>
 		<artifactId>nifi-neuromask-bundle</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.5</version>
 	</parent>
 
 	<artifactId>nifi-neuromask-processors</artifactId>
@@ -25,14 +25,33 @@
 			<version>${nifi.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.nifi</groupId>
+			<artifactId>nifi-record-serialization-service-api</artifactId>
+			<version>${nifi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.11.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.nifi</groupId>
+			<artifactId>nifi-record</artifactId>
+			<version>1.21.0</version>
+
+		</dependency>
+
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
+			<version>${jackson-core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
+			<version>${jackson-databind.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -41,9 +60,26 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.nifi</groupId>
+			<artifactId>nifi-mock</artifactId>
+			<version>${nifi.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-core.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.javacrumbs.json-unit</groupId>
+			<artifactId>json-unit</artifactId>
+			<version>2.38.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
