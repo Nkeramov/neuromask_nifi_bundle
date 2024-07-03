@@ -7,7 +7,6 @@ import org.apache.nifi.annotation.behavior.WritesAttribute;
 import org.apache.nifi.annotation.behavior.WritesAttributes;
 import org.apache.nifi.annotation.documentation.CapabilityDescription;
 import org.apache.nifi.annotation.documentation.Tags;
-import org.apache.nifi.annotation.lifecycle.OnScheduled;
 import org.apache.nifi.components.PropertyDescriptor;
 import org.apache.nifi.expression.ExpressionLanguageScope;
 import org.apache.nifi.flowfile.FlowFile;
@@ -121,10 +120,6 @@ public class NeuromaskBinParser extends AbstractProcessor {
 		return relationships;
 	}
 
-    @OnScheduled
-	public final void onScheduled(final ProcessContext context) {
-		getLogger().debug("Scheduled NeuromaskBinParser processor");
-    }
 
     @Override
 	public final void onTrigger(final ProcessContext context, final ProcessSession session) throws ProcessException {
@@ -179,11 +174,12 @@ public class NeuromaskBinParser extends AbstractProcessor {
 					}
 					getLogger().debug("Found {} entries", entries.size());
 					for (byte[] entry : entries) {
-						int j = 0;
-						for (byte b : entry) {
-							if ((j < 11) || j > 11 && ((j - 11) % 5 != 0))
+						for (int j = 0; j < entry.length; j++) {
+							byte b = entry[j];
+							if ((j < 11) || (j > 11 && ((j - 11) % 5 != 0))) {
 								b = reverseByte(b);
-							j++;
+							}
+							entry[j] = b;
 						}
 						int entrySize = ((entry[3] & 0xff) << 8) | (entry[2] & 0xff);
 						int entryId = ((entry[6] & 0xff) << 16) | (entry[5] & 0xff) << 8 | (entry[4] & 0xff);
