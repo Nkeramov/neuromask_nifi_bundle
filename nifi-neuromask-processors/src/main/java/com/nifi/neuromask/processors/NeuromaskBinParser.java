@@ -22,6 +22,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -192,9 +193,11 @@ public class NeuromaskBinParser extends AbstractProcessor {
 						rootNode.put("_time", entryTimestamp);
 						for (int i = 11; i <= entry.length - 5 - 2; i += 5) {
 							if (entryFields.containsKey(entry[i])) {
-								int asInt = (entry[i + 1] & 0xFF) | ((entry[i + 2] & 0xFF) << 8) | ((entry[i + 3] & 0xFF) << 16) | ((entry[i + 4] & 0xFF) << 24);
+								int asInt = (entry[i + 1] & 0xFF) | ((entry[i + 2] & 0xFF) << 8) |
+										((entry[i + 3] & 0xFF) << 16) | ((entry[i + 4] & 0xFF) << 24);
 								float asFloat = roundToNDecimalPlaces(Float.intBitsToFloat(asInt), floatPrecision);
-								getLogger().debug(String.format("%s: %s", entryFields.get(entry[i]), String.format("%." + floatPrecision + "f", asFloat)));
+								DecimalFormat df = new DecimalFormat("#." + floatPrecision + "f");
+								getLogger().debug(String.format("%s: %s", entryFields.get(entry[i]), df.format(asFloat)));
 								rootNode.put(entryFields.get(entry[i]), asFloat);
 							} else {
 								getLogger().warn(String.format("%02X key not found", entry[i]));
@@ -215,14 +218,14 @@ public class NeuromaskBinParser extends AbstractProcessor {
 		});
 
 		flowFile = session.write(flowFile, out -> {
-			if (outputJsons.size() > 0){
+			if (!outputJsons.isEmpty()){
 				for(String str: outputJsons) {
 					out.write(str.getBytes());
 					out.write(System.lineSeparator().getBytes());
 				}
 			}
 		});
-		if(!includeZeroRecordFlowFiles && outputJsons.size() == 0){
+		if(!includeZeroRecordFlowFiles && outputJsons.isEmpty()){
 			session.remove(flowFile);
 		} else {
 			flowFile = session.putAttribute(flowFile, RECORD_COUNT, String.valueOf(outputJsons.size()));
