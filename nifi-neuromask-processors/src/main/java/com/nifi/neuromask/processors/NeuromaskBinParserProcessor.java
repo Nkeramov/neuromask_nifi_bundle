@@ -31,9 +31,9 @@ import java.util.*;
 @CapabilityDescription("Parser for neuromask bin packets")
 @WritesAttributes({
 		@WritesAttribute(attribute = "mime.type", description = "application/json"),
-		@WritesAttribute(attribute = NeuromaskBinParser.RECORD_COUNT, description = "contains the number of records retrieved from the file")
+		@WritesAttribute(attribute = NeuromaskBinParserProcessor.RECORD_COUNT, description = "contains the number of records retrieved from the file")
 })
-public class NeuromaskBinParser extends AbstractProcessor {
+public class NeuromaskBinParserProcessor extends AbstractProcessor {
 
 	public final static String RECORD_COUNT = "record.count";
 	private static final int DEFAULT_FLOAT_PRECISION = 3;
