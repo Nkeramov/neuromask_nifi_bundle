@@ -11,24 +11,33 @@
 	</parent>
 
 	<artifactId>nifi-neuromask-processors</artifactId>
+	<name>Neuromask NiFi Bundle :: Neuromask Processors</name>
 	<packaging>jar</packaging>
 
+	<properties>
+		<maven.deploy.skip>false</maven.deploy.skip>
+	</properties>
+
 	<dependencies>
+
 		<dependency>
 			<groupId>org.apache.nifi</groupId>
 			<artifactId>nifi-api</artifactId>
 			<version>${nifi.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.nifi</groupId>
 			<artifactId>nifi-utils</artifactId>
 			<version>${nifi.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.nifi</groupId>
 			<artifactId>nifi-record-serialization-service-api</artifactId>
 			<version>${nifi.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
@@ -40,43 +49,52 @@
 			<artifactId>nifi-record</artifactId>
 			<version>${nifi.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson-core.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-databind.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j-simple.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.21.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.nifi</groupId>
 			<artifactId>nifi-mock</artifactId>
 			<version>${nifi.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito-core.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.11.4</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
+
 </project>
